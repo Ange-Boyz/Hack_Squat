@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Payment</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/payment.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Step 1: Form with Photos -->
+    <div class="card active" id="stepForm">
+      <h2>Transaction</h2>
+      <div class="transaction-visual">
+        <div class="user-block">
+          <img src="assets/pic2.jpg" alt="Sender" class="user-photo" />
+          <p class="user-label">Sender</p>
+        </div>
+        <div class="transaction-arrow">
+          <div class="arrow"></div>
+          <div class="arrow reverse"></div>
+        </div>
+        <div class="user-block">
+          <img src="assets/pic1.jpeg" alt="Receiver" class="user-photo" />
+          <p class="user-label">Receiver</p>
+        </div>
+      </div>
+      <form id="paymentForm">
+        <div class="phone-input-group">
+          <select id="country-code">
+            <option value="+237" selected>🇨🇲 +237</option>
+            <option value="+234">🇳🇬 +234</option>
+            <option value="+225">🇨🇮 +225</option>
+            <option value="+221">🇸🇳 +221</option>
+          </select>
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Phone number"
+            required
+            inputmode="numeric"
+          />
+        </div>
+        <button type="submit" class="submit-btn">Continue</button>
+      </form>
+    </div>
+
+    <!-- Step 2: Pending -->
+    <div class="card slide hidden" id="stepPending">
+      <i class="ri-loader-4-line loader-icon"></i>
+      <h2>Pending...</h2>
+      <p>Verifying your transaction...</p>
+      <button class="submit-btn" id="checkStatus">Check Status</button>
+    </div>
+
+    <!-- Step 3a: Success -->
+    <div class="card slide hidden" id="stepSuccess">
+      <h2>Success</h2>
+      <p>Your payment was successful.</p>
+      <a href="index.html" class="home-btn">Return Home</a>
+    </div>
+
+    <!-- Step 3b: Succeed -->
+    <div class="card slide hidden" id="stepSucceed">
+      <h2>🎉 Succeed</h2>
+      <p>The transaction was marked as successful!</p>
+      <a href="index.html" class="home-btn">Return Home</a>
+    </div>
+
+    <!-- Step 3c: Canceled -->
+    <div class="card slide hidden" id="stepCanceled">
+      <h2>🚫 Canceled</h2>
+      <p>The transaction was canceled.</p>
+      <a href="index.html" class="home-btn">Return Home</a>
+    </div>
+
+  </div>
+  <script src="js/payment.js"></script>
+</body>
+</html>

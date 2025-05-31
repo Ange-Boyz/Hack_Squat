@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Mentor Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        .app-root {
+            min-height: 100vh;
+            background: #f8fafc;
+            width: 100%;
+            min-width: 100vw;
+        }
+
+        .floating-search-bar {
+            position: sticky;
+            top: 24px;
+            left: 0;
+            right: 0;
+            margin: 0 auto 32px auto;
+            max-width: 540px;
+            z-index: 100;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px -8px rgba(30,41,59,0.12), 0 1.5px 4px rgba(59,130,246,0.07);
+            display: flex;
+            align-items: center;
+            gap: 0;
+            padding: 0 16px;
+            height: 56px;
+            border: 1.5px solid #e2e8f0;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .floating-search-bar:focus-within {
+            box-shadow: 0 8px 36px -6px rgba(59,130,246,0.18), 0 2px 8px rgba(59,130,246,0.08);
+            border-color: #3b82f6;
+        }
+
+        .floating-search-bar .search-icon {
+            font-size: 22px;
+            color: #64748b;
+            margin-right: 10px;
+            transition: color 0.2s;
+        }
+
+        .floating-search-bar:focus-within .search-icon {
+            color: #3b82f6;
+        }
+
+        .floating-search-bar .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 17px;
+            font-weight: 500;
+            color: #1e293b;
+            padding: 0;
+        }
+
+        .floating-search-bar .search-input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+            opacity: 1;
+        }
+
+        .floating-search-bar .search-clear-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 20px;
+            margin-right: 4px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .floating-search-bar .search-clear-btn.show {
+            display: block;
+        }
+
+        .floating-search-bar .search-clear-btn:hover {
+            color: #3b82f6;
+        }
+
+        .floating-search-bar .search-submit-btn {
+            background: #3b82f6;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 14px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .floating-search-bar .search-submit-btn:hover {
+            background: #2563eb;
+        }
+
+        .floating-search-bar .search-suggestions {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 8px 32px -8px rgba(30,41,59,0.13);
+            border: 1px solid #e2e8f0;
+            z-index: 200;
+            margin-top: 2px;
+            display: none;
+            max-height: 320px;
+            overflow-y: auto;
+            animation: fadeIn 0.18s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .floating-search-bar .search-suggestions.show {
+            display: block;
+        }
+
+        .floating-search-bar .suggestion-item {
+            padding: 13px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.18s;
+        }
+
+        .floating-search-bar .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .floating-search-bar .suggestion-item:hover,
+        .floating-search-bar .suggestion-item:focus {
+            background: #f1f5f9;
+        }
+
+        .floating-search-bar .suggestion-icon {
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        .floating-search-bar .suggestion-category {
+            font-size: 12px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        /* Enhanced Search and Filter Section */
+        .search-filter-section {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-bar {
+            position: relative;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .search-bar:focus-within {
+            background: white;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .search-icon {
+            color: #64748b;
+            font-size: 20px;
+            margin-right: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .search-bar:focus-within .search-icon {
+            color: #3b82f6;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 18px 0;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #1e293b;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .search-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 12px;
+        }
+
+        .search-clear-btn {
+            display: none;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 8px;
+            padding: 6px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s ease;
+        }
+
+        .search-clear-btn:hover {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .search-clear-btn.show {
+            display: flex;
+        }
+
+        .search-submit-btn {
+            background: #3b82f6;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .search-submit-btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            margin-top: 4px;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-suggestions.show {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .suggestion-item:hover {
+            background: #f8fafc;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-icon {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .suggestion-text {
+            flex: 1;
+        }
+
+        .suggestion-category {
+            font-size: 12px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .filter-button:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .filter-button.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+
+        .clear-filters {
+            padding: 10px 16px;
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .clear-filters:hover {
+            background: #f8fafc;
+            color: #475569;
+            border-color: #cbd5e1;
+        }
+
+        /* Filter Dropdown */
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-item:hover {
+            background: #f8fafc;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 20px 0;
+        }
+
+        .mentor-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #cbd5e1;
+        }
+
+        .mentor-card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            padding: 24px 24px 0 24px;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 16px auto;
+            border: 4px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .card-content {
+            padding: 0 24px 24px 24px;
+            text-align: center;
+        }
+
+        .mentor-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .verified-badge {
+            color: #059669;
+            font-size: 18px;
+        }
+
+        .mentor-location {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+
+        .mentor-description {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .mentor-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-icon {
+            font-size: 16px;
+            color: #3b82f6;
+            margin-bottom: 4px;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.025em;
+        }
+
+        .cta-button:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .mentor-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+            justify-content: center;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: #3b82f6;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .no-results i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #cbd5e1;
+        }
+
+        .no-results h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        /* Responsive adjustments for all devices */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 98vw;
+                padding: 0 8px;
+            }
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 4vw;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .mentor-card {
+                border-radius: 10px;
+                min-width: 0;
+            }
+            .card-header {
+                padding: 16px 8px 0 8px;
+            }
+            .card-content {
+                padding: 0 8px 16px 8px;
+            }
+            .profile-image {
+                width: 64px;
+                height: 64px;
+                font-size: 22px;
+                margin-bottom: 8px;
+                border-width: 2px;
+            }
+            .mentor-name {
+                font-size: 16px;
+            }
+            .mentor-description {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+            .mentor-tags {
+                gap: 4px;
+                margin-bottom: 10px;
+            }
+            .mentor-stats {
+                padding: 8px 2px;
+                gap: 4px;
+                margin-bottom: 10px;
+            }
+            .stat-value {
+                font-size: 13px;
+            }
+            .stat-label {
+                font-size: 10px;
+            }
+            .cta-button {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            .modal-content {
+                max-width: 98vw;
+                padding: 18px 6px 12px 6px;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1vw;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .mentor-card {
+                border-radius: 8px;
+            }
+            .profile-image {
+                width: 48px;
+                height: 48px;
+                font-size: 16px;
+                margin-bottom: 6px;
+                border-width: 2px;
+            }
+            .card-header {
+                padding: 8px 4px 0 4px;
+            }
+            .card-content {
+                padding: 0 4px 8px 4px;
+            }
+            .mentor-name {
+                font-size: 13px;
+            }
+            .mentor-description {
+                font-size: 11px;
+                margin-bottom: 6px;
+            }
+            .mentor-tags {
+                gap: 2px;
+                margin-bottom: 6px;
+            }
+            .mentor-stats {
+                padding: 4px 1px;
+                gap: 2px;
+                margin-bottom: 6px;
+            }
+            .stat-value {
+                font-size: 11px;
+            }
+            .stat-label {
+                font-size: 8px;
+            }
+            .cta-button {
+                padding: 6px 6px;
+                font-size: 11px;
+            }
+            .modal-content {
+                max-width: 100vw;
+                width: 100vw;
+                min-width: 0;
+                border-radius: 0;
+                padding: 10px 2vw 10px 2vw;
+            }
+            .modal-close {
+                top: 8px;
+                right: 8px;
+                font-size: 22px;
+            }
+        }
+
+        /* Profile image: always round, image fits perfectly */
+        .profile-image {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 16px auto;
+            border: 4px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            display: block;
+        }
+
+        /* Profile Modal Styles */
+        .profile-modal {
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(30,41,59,0.35);
+            backdrop-filter: blur(2px);
+        }
+        .modal-content {
+            position: relative;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(30,41,59,0.18);
+            padding: 32px 24px 24px 24px;
+            max-width: 400px;
+            width: 95vw;
+            z-index: 1;
+            animation: fadeInModal 0.18s;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: translateY(32px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 26px;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close:hover {
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+<div class="app-root">
+
+       <div class="header">
+            <h1>Expert Mentors</h1>
+            <p>Connect with industry professionals and accelerate your career growth</p>
+        </div>
+
+       
+    <!-- Barre de recherche moderne -->
+    <div class="floating-search-bar">
+        <i class="ri-search-line search-icon" aria-hidden="true"></i>
+        <input
+            type="text"
+            class="search-input"
+            placeholder="Search mentors by name, skill, or expertise…"
+            id="searchInput"
+            aria-label="Search mentors"
+            autocomplete="off"
+            spellcheck="false"
+        >
+        <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear search" tabindex="0">
+            <i class="ri-close-line"></i>
+        </button>
+        <button class="search-submit-btn" id="searchSubmitBtn" aria-label="Submit search" tabindex="0">
+            <i class="ri-search-2-line"></i>
+        </button>
+        <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Suggestions">
+            <div class="suggestion-item" data-suggestion="javascript" tabindex="0" role="option">
+                <i class="ri-code-s-slash-line suggestion-icon"></i>
+                <span class="suggestion-text">JavaScript</span>
+                <span class="suggestion-category">Skill</span>
+            </div>
+            <div class="suggestion-item" data-suggestion="react" tabindex="0" role="option">
+                <i class="ri-reactjs-line suggestion-icon"></i>
+                <span class="suggestion-text">React</span>
+                <span class="suggestion-category">Framework</span>
+            </div>
+            <div class="suggestion-item" data-suggestion="data science" tabindex="0" role="option">
+                <i class="ri-bar-chart-line suggestion-icon"></i>
+                <span class="suggestion-text">Data Science</span>
+                <span class="suggestion-category">Field</span>
+            </div>
+            <div class="suggestion-item" data-suggestion="ux design" tabindex="0" role="option">
+                <i class="ri-palette-line suggestion-icon"></i>
+                <span class="suggestion-text">UX Design</span>
+                <span class="suggestion-category">Design</span>
+            </div>
+            <div class="suggestion-item" data-suggestion="devops" tabindex="0" role="option">
+                <i class="ri-settings-3-line suggestion-icon"></i>
+                <span class="suggestion-text">DevOps</span>
+                <span class="suggestion-category">Operations</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Le reste de ta page ici (header, filtres, cartes, etc.) -->
+    <div class="container">
+     
+
+            <div class="cards-grid" id="mentorGrid">
+                <!-- Mentor Card 1 -->
+                <div class="mentor-card" onclick="visitProfile('john-doe')" 
+                     data-name="john doe" 
+                     data-location="san francisco, ca" 
+                     data-skills="full-stack,react,nodejs,javascript,web-development" 
+                     data-rating="4.9"
+                     data-distance="0">
+                    <div class="card-header">
+                        <div class="profile-image">
+                            <img src="assets/pic2.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mentor-name">
+                            John Doe
+                            <i class="ri-verified-badge-fill verified-badge"></i>
+                        </h3>
+                        <p class="mentor-location">
+                            <i class="ri-map-pin-line"></i>
+                            San Francisco, CA
+                        </p>
+                        <div class="mentor-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Full-Stack</span>
+                        </div>
+                        <p class="mentor-description">
+                            Full-stack developer with 8+ years of experience building scalable web applications. Specialized in React, Node.js, and cloud architecture solutions.
+                        </p>
+                    
+                        <button class="cta-button" onclick="event.stopPropagation(); visitProfile('john-doe')">
+                            <i class="ri-user-line"></i>
+                            View Profile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 2 -->
+                <div class="mentor-card" onclick="visitProfile('sarah-wilson')" 
+                     data-name="sarah wilson" 
+                     data-location="london, uk" 
+                     data-skills="ux-ui,design,user-research,design-systems,product-strategy" 
+                     data-rating="4.8"
+                     data-distance="5000">
+                    <div class="card-header">
+                        <div class="profile-image">
+                            <img src="assets/pic1.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mentor-name">
+                            Sarah Wilson
+                            <i class="ri-verified-badge-fill verified-badge"></i>
+                        </h3>
+                        <p class="mentor-location">
+                            <i class="ri-map-pin-line"></i>
+                            London, UK
+                        </p>
+                        <div class="mentor-tags">
+                            <span class="tag">UX/UI</span>
+                            <span class="tag">Design Systems</span>
+                            <span class="tag">Research</span>
+                        </div>
+                        <p class="mentor-description">
+                            Senior UX/UI Designer and product strategist with expertise in user research, design systems, and creating intuitive digital experiences.
+                        </p>
+                      
+                        <button class="cta-button" onclick="event.stopPropagation(); visitProfile('sarah-wilson')">
+                            <i class="ri-user-line"></i>
+                            View Profile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 3 -->
+                <div class="mentor-card" onclick="visitProfile('alex-chen')" 
+                     data-name="alex chen" 
+                     data-location="toronto, canada" 
+                     data-skills="data-science,machine-learning,ai,python,deep-learning" 
+                     data-rating="5.0"
+                     data-distance="3000">
+                    <div class="card-header">
+                        <div class="profile-image">AC</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mentor-name">
+                            Alex Chen
+                            <i class="ri-verified-badge-fill verified-badge"></i>
+                        </h3>
+                        <p class="mentor-location">
+                            <i class="ri-map-pin-line"></i>
+                            Toronto, Canada
+                        </p>
+                        <div class="mentor-tags">
+                            <span class="tag">Data Science</span>
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <p class="mentor-description">
+                            Data scientist and AI engineer passionate about machine learning, deep learning, and helping aspiring developers break into the tech industry.
+                        </p>
+                    
+                        <button class="cta-button" onclick="event.stopPropagation(); visitProfile('alex-chen')">
+                            <i class="ri-user-line"></i>
+                            View Profile
+                        </button>
+                    </div>
+                </div>
+                <!-- Ajoutez d'autres cartes mentors ici si besoin -->
+            </div>
+            <div class="no-results" id="noResults" style="display:none;">
+                <i class="ri-emotion-sad-line"></i>
+                <h3>No mentors found</h3>
+                <p>Try adjusting your search or filters.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="profile-modal" style="display:none;">
+        <div class="modal-backdrop" onclick="closeProfileModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProfileModal()">
+                <i class="ri-close-line"></i>
+            </button>
+            <div id="modalProfileContent">
+                <!-- Le contenu du mentor sera injecté ici -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// --- Search Logic (sans filtrage) ---
+const searchInput = document.getElementById('searchInput');
+const searchClearBtn = document.getElementById('searchClearBtn');
+const searchSubmitBtn = document.getElementById('searchSubmitBtn');
+const searchSuggestions = document.getElementById('searchSuggestions');
+const suggestionItems = document.querySelectorAll('.suggestion-item');
+
+// Show/Hide clear button and suggestions
+searchInput.addEventListener('input', () => {
+    searchClearBtn.classList.toggle('show', searchInput.value.length > 0);
+    toggleSuggestions();
+});
+
+// Clear search
+searchClearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchClearBtn.classList.remove('show');
+    toggleSuggestions();
+    searchInput.focus();
+});
+
+// Submit search (no filtering)
+searchSubmitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    searchSuggestions.classList.remove('show');
+});
+
+// Suggestions logic
+searchInput.addEventListener('focus', toggleSuggestions);
+searchInput.addEventListener('blur', () => setTimeout(() => searchSuggestions.classList.remove('show'), 150));
+suggestionItems.forEach(item => {
+    item.addEventListener('mousedown', () => {
+        searchInput.value = item.dataset.suggestion;
+        searchSuggestions.classList.remove('show');
+        searchClearBtn.classList.add('show');
+    });
+    item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            searchInput.value = item.dataset.suggestion;
+            searchSuggestions.classList.remove('show');
+            searchClearBtn.classList.add('show');
+            searchInput.focus();
+        }
+    });
+});
+
+function toggleSuggestions() {
+    if (searchInput.value.trim() === '') {
+        searchSuggestions.classList.add('show');
+    } else {
+        searchSuggestions.classList.remove('show');
+    }
+}
+
+// Allow pressing Enter to close suggestions
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        searchSuggestions.classList.remove('show');
+    }
+    if (e.key === 'ArrowDown') {
+        const first = searchSuggestions.querySelector('.suggestion-item');
+        if (first) first.focus();
+    }
+});
+
+// Profile Modal Logic
+function visitProfile(username) {
+    // Trouve la carte mentor correspondante
+    const card = document.querySelector(`.mentor-card[onclick*="${username}"]`);
+    if (!card) return;
+
+    // Clone le header et le contenu de la carte pour le modal
+    const cardHeader = card.querySelector('.card-header')?.outerHTML || '';
+    const cardContent = card.querySelector('.card-content')?.outerHTML || '';
+    const modalContent = `
+        <div class="modal-profile">
+            ${cardHeader}
+            ${cardContent}
+        </div>
+    `;
+    document.getElementById('modalProfileContent').innerHTML = modalContent;
+    document.getElementById('profileModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Empêche le scroll du fond
+}
+
+function closeProfileModal() {
+    document.getElementById('profileModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>
