@@ -658,8 +658,29 @@ body {
     font-weight: 600;
 }
 
-/* Responsive for Create Event Panel */
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1000px;
+    }
+    .content-layout {
+        grid-template-columns: 1fr 340px;
+        gap: 24px;
+    }
+    .create-event-panel {
+        max-width: 340px;
+    }
+}
+
 @media (max-width: 900px) {
+    .container {
+        max-width: 100%;
+        padding: 0 8px;
+    }
+    .content-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
     .create-event-panel {
         max-width: 100%;
         margin: 0 0 2rem 0;
@@ -670,24 +691,84 @@ body {
     .quick-stats {
         margin: 0 0 18px 0;
     }
+    .events-section {
+        padding: 18px 6px;
+    }
 }
 
-@media (max-width: 640px) {
-    .create-event-panel {
-        padding: 0 0 18px 0;
+@media (max-width: 700px) {
+    .hero-content h1 {
+        font-size: 2rem;
     }
     .panel-header {
-        padding: 18px 10px 10px 10px;
-    }
-    .create-event-form {
         padding: 14px 6px 10px 6px;
     }
+    .create-event-form {
+        padding: 10px 4px 8px 4px;
+    }
     .quick-stats {
-        padding: 12px 6px 10px 6px;
+        padding: 8px 4px 8px 4px;
     }
     .stats-grid {
         flex-direction: column;
         gap: 8px;
+    }
+    .events-section {
+        padding: 10px 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.2rem;
+    }
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+    .search-bar {
+        padding: 4px;
+        max-width: 100%;
+    }
+    .tab-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .section-header h2 {
+        font-size: 1.1rem;
+    }
+    .featured-card,
+    .events-section,
+    .create-event-form,
+    .quick-stats {
+        padding: 8px 2px;
+    }
+    .event-card.compact-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem 0.2rem;
+        min-height: 90px;
+    }
+    .event-image {
+        width: 100%;
+        height: 70px;
+        margin-bottom: 0.5rem;
+    }
+    .event-content {
+        padding: 0;
+    }
+    .panel-header h2 {
+        font-size: 1rem;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 370px) {
+    .event-title {
+        font-size: 0.9em;
+    }
+    .btn-create-event {
+        font-size: 0.9rem;
+        padding: 10px 0;
     }
 }
 
