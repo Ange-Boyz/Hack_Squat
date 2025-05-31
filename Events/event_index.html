@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerU - Events & Opportunities</title>
+    <link rel="stylesheet" href="event_style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>Discover Amazing <span class="gradient-text">Events</span></h1>
+                    <p>Connect with industry leaders, learn new skills, and advance your career through curated events.</p>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search events, hackathons, workshops..." id="searchInput">
+                        <button class="filter-btn" id="filterBtn"><i class="fas fa-filter"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Tabs -->
+            <section class="filter-tabs">
+                <button class="tab-btn active" data-filter="all">All Events</button>
+                <button class="tab-btn" data-filter="hackathon">Hackathons</button>
+                <button class="tab-btn" data-filter="workshop">Workshops</button>
+                <button class="tab-btn" data-filter="conference">Conferences</button>
+                <button class="tab-btn" data-filter="mentorship">Mentorship</button>
+                <button class="tab-btn" data-filter="internship">Internships</button>
+            </section>
+
+            <!-- Main Content Area - Side by Side Layout -->
+            <div class="content-layout">
+                <!-- Left Side - Events List -->
+                <section class="events-section">
+                    <div class="section-header">
+                        <h2>Upcoming Events</h2>
+                    </div>
+                    
+                    <!-- Featured Event -->
+                    <div class="featured-event">
+                        <div class="featured-card">
+                            <div class="featured-content">
+                                <div class="featured-badge">Featured Event</div>
+                                <h3>The Future of AI in African Tech</h3>
+                                <p>Join leading AI experts and entrepreneurs as they discuss the transformative potential of artificial intelligence in Africa's tech ecosystem.</p>
+                                <div class="featured-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Saturday, June 15, 2025 • 2:00 PM</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Buea, Cameroon</span>
+                                    </div>
+                                    <div class="attendees">
+                                        <div class="attendee-avatars">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face" alt="Attendee">
+                                            <img src="https://images.unsplash.com/photo-1494790108755-2616b2e0c2a5?w=32&h=32&fit=crop&crop=face" alt="Attendee">
+                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face" alt="Attendee">
+                                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face" alt="Attendee">
+                                        </div>
+                                        <span>120+ registered</span>
+                                    </div>
+                                </div>
+                                <div class="featured-actions">
+                                    <button class="btn-primary">Register Now</button>
+                                    <button class="btn-secondary">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="featured-image">
+                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop" alt="AI Conference">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="events-grid" id="eventsGrid">
+                        <!-- Events will be dynamically loaded here -->
+                    </div>
+                </section>
+
+                <!-- Right Side - Create Event Panel -->
+                <aside class="create-event-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-plus-circle"></i> Create New Event</h2>
+                        <p>Share your knowledge and connect with the community</p>
+                    </div>
+                    
+                    <form class="create-event-form" id="createEventForm">
+                        <div class="form-group">
+                            <label for="eventName">Event Name</label>
+                            <input type="text" id="eventName" placeholder="Enter event name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="eventType">Event Type</label>
+                            <select id="eventType" required>
+                                <option value="">Select type</option>
+                                <option value="hackathon">Hackathon</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="conference">Conference</option>
+                                <option value="mentorship">Mentorship Session</option>
+                                <option value="internship">Internship Program</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="eventDate">Date & Time</label>
+                            <input type="datetime-local" id="eventDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" placeholder="e.g., Buea, Cameroon" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="eventDescription">Description</label>
+                            <textarea id="eventDescription" rows="4" placeholder="Describe your event..." required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventPrice">Price (FCFA)</label>
+                                <input type="number" id="eventPrice" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxAttendees">Max Attendees</label>
+                                <input type="number" id="maxAttendees" min="1" placeholder="50">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-create-event">
+                            <i class="fas fa-rocket"></i> Create Event
+                        </button>
+                    </form>
+                    
+                    <!-- Quick Stats -->
+                    <div class="quick-stats">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">150+</div>
+                                <div class="stat-label">Active Events</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">2.5K+</div>
+                                <div class="stat-label">Participants</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">85%</div>
+                                <div class="stat-label">Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <script src="event_script.js"></script>
+</body>
+</html>
