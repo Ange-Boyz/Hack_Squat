@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerU - Mentee Profile</title>
+    <link rel="stylesheet" href="mentees_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="profile-main">
+        <!-- Profile Cover -->
+        <div class="profile-cover" style="margin-bottom: 1.2rem;">
+            <div class="cover-bg"></div>
+            <div class="profile-avatar-wrapper">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&h=120&fit=crop&crop=face" alt="Alex Tche" class="profile-avatar">
+            </div>
+            <div class="profile-info">
+                <div class="profile-name">Alex Tche</div>
+                <div class="profile-meta">
+                    <span><i class="ri-map-pin-2-line"></i> Buea, Cameroon</span>
+                    <span class="profile-public"><i class="ri-global-line"></i> Public Profile</span>
+                </div>
+                <div class="profile-stats">
+                    <span><i class="ri-group-line"></i> 12+ Mentors</span>
+                    <span><i class="ri-briefcase-line"></i> 5 Applications</span>
+                    <span><i class="ri-bar-chart-2-line"></i> 85% Match</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Creation -->
+        <div class="profile-postbox feed-post" style="margin-bottom: 1.2rem;">
+            <div class="feed-post-header">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Alex Tche" class="feed-post-avatar">
+                <span class="feed-post-author">Alex Tche</span>
+                <span class="feed-post-time">Now</span>
+            </div>
+            <div class="feed-post-content" style="margin-bottom:0;">
+                <input type="text" placeholder="Share an update..." class="postbox-input" style="margin-bottom:0;">
+            </div>
+            <div class="postbox-actions" style="margin-top:0.5rem;">
+                <button><i class="ri-image-line"></i> Image</button>
+                <button><i class="ri-video-line"></i> Video / GIF</button>
+                <button><i class="ri-bar-chart-box-line"></i> Activity / Poll</button>
+                <button><i class="ri-emotion-happy-line"></i> Feelings</button>
+            </div>
+        </div>
+
+        <!-- Feed Content -->
+        <div class="profile-feed">
+            <!-- Post 1 -->
+            <div class="feed-post">
+                <div class="feed-post-header">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Alex Tche" class="feed-post-avatar">
+                    <span class="feed-post-author">Alex Tche</span>
+                    <span class="feed-post-time">5 minutes ago</span>
+                </div>
+                <div class="feed-post-content">
+                    🎉 Just completed my first mentorship session with <strong>@JohnDoe</strong> on React development! Learning so much about component architecture and state management. Thank you for the guidance! #EmpowerU #ReactJS #Mentorship
+                    <div class="post-tags">
+                        <span class="tag">#ReactJS</span>
+                        <span class="tag">#WebDevelopment</span>
+                        <span class="tag">#Learning</span>
+                    </div>
+                </div>
+                <div class="post-engagement">
+                    <div class="engagement-stats">
+                        <div class="reactions">
+                            <!-- Removed emojis, replaced with Remix icon -->
+                            <i class="ri-thumb-up-line"></i>
+                            <span class="reaction-count">12 reactions</span>
+                        </div>
+                        <span class="comments-count">3 comments</span>
+                    </div>
+                    <div class="engagement-actions">
+                        <button class="engage-btn active"><i class="ri-thumb-up-line"></i> Like</button>
+                        <button class="engage-btn"><i class="ri-chat-3-line"></i> Comment</button>
+                        <button class="engage-btn"><i class="ri-share-forward-line"></i> Share</button>
+                    </div>
+                </div>
+                <div class="comments-section">
+                    <div class="comment-list" id="comments-1">
+                        <!-- Example comment -->
+                        <div class="comment-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=28&h=28&fit=crop&crop=face" class="comment-avatar" alt="User">
+                            <div>
+                                <div class="comment-content">Great job Alex! 🎉</div>
+                                <div class="comment-meta">Jean-Paul · 2m ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="add-comment-form" onsubmit="return addComment(event, 1)">
+                        <input class="add-comment-input" type="text" placeholder="Add a comment..." required>
+                        <button class="add-comment-btn" type="submit">Post</button>
+                    </form>
+                </div>
+                <div class="rating-section" data-post="1">
+                    <span class="rating-label">Rate:</span>
+                    <span class="rating-stars">
+                        <i class="ri-star-fill rating-star" data-value="1"></i>
+                        <i class="ri-star-fill rating-star" data-value="2"></i>
+                        <i class="ri-star-fill rating-star" data-value="3"></i>
+                        <i class="ri-star-fill rating-star" data-value="4"></i>
+                        <i class="ri-star-fill rating-star" data-value="5"></i>
+                    </span>
+                    <span class="rating-value" id="rating-value-1">0</span>
+                </div>
+            </div>
+            <!-- Post 2 -->
+            <div class="feed-post">
+                <div class="feed-post-header">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Alex Tche" class="feed-post-avatar">
+                    <span class="feed-post-author">Alex Tche</span>
+                    <span class="feed-post-time">2 hours ago</span>
+                </div>
+                <div class="feed-post-content">
+                    Looking for a mentor in Data Science! 📊 I'm particularly interested in machine learning and Python. Located in Douala and willing to meet in person or online. Any recommendations?
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <i class="ri-search-line"></i>
+                            <span>Seeking Mentorship</span>
+                        </div>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="ri-map-pin-2-line"></i>
+                                <span>Douala, Cameroon</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="ri-code-s-slash-line"></i>
+                                <span>Data Science, Python, ML</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="ri-calendar-line"></i>
+                                <span>Flexible schedule</span>
+                            </div>
+                        </div>
+                        <button class="opportunity-btn">Connect</button>
+                    </div>
+                </div>
+                <div class="post-engagement">
+                    <div class="engagement-stats">
+                        <div class="reactions">
+                            <!-- Removed emojis, replaced with Remix icon -->
+                            <i class="ri-thumb-up-line"></i>
+                            <span class="reaction-count">8 reactions</span>
+                        </div>
+                        <span class="comments-count">5 comments</span>
+                    </div>
+                    <div class="engagement-actions">
+                        <button class="engage-btn"><i class="ri-thumb-up-line"></i> Like</button>
+                        <button class="engage-btn"><i class="ri-chat-3-line"></i> Comment</button>
+                        <button class="engage-btn"><i class="ri-share-forward-line"></i> Share</button>
+                    </div>
+                </div>
+                <div class="comments-section">
+                    <div class="comment-list" id="comments-2">
+                        <!-- Example comment -->
+                        <div class="comment-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=28&h=28&fit=crop&crop=face" class="comment-avatar" alt="User">
+                            <div>
+                                <div class="comment-content">This is a great opportunity!</div>
+                                <div class="comment-meta">Marie · 10m ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="add-comment-form" onsubmit="return addComment(event, 2)">
+                        <input class="add-comment-input" type="text" placeholder="Add a comment..." required>
+                        <button class="add-comment-btn" type="submit">Post</button>
+                    </form>
+                </div>
+                <div class="rating-section" data-post="2">
+                    <span class="rating-label">Rate:</span>
+                    <span class="rating-stars">
+                        <i class="ri-star-fill rating-star" data-value="1"></i>
+                        <i class="ri-star-fill rating-star" data-value="2"></i>
+                        <i class="ri-star-fill rating-star" data-value="3"></i>
+                        <i class="ri-star-fill rating-star" data-value="4"></i>
+                        <i class="ri-star-fill rating-star" data-value="5"></i>
+                    </span>
+                    <span class="rating-value" id="rating-value-2">0</span>
+                </div>
+            </div>
+            <!-- Post 3 -->
+            <div class="feed-post">
+                <div class="feed-post-header">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Alex Tche" class="feed-post-avatar">
+                    <span class="feed-post-author">Alex Tche</span>
+                    <span class="feed-post-time">1 day ago</span>
+                </div>
+                <div class="feed-post-content">
+                    Excited to announce our upcoming Web Development Hackathon! 🚀 48 hours of coding, learning, and networking. Prizes up to 500,000 FCFA! Who's joining?
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=200&fit=crop" alt="Hackathon Event">
+                            <div class="event-overlay">
+                                <span class="event-date">Jun 15-16</span>
+                            </div>
+                        </div>
+                        <div class="event-details">
+                            <h4>Web Dev Hackathon 2025</h4>
+                            <div class="event-info">
+                                <div class="event-item">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>June 15-16, 2025</span>
+                                </div>
+                                <div class="event-item">
+                                    <i class="ri-map-pin-2-line"></i>
+                                    <span>University of Buea</span>
+                                </div>
+                                <div class="event-item">
+                                    <i class="ri-group-line"></i>
+                                    <span>24 attending</span>
+                                </div>
+                            </div>
+                            <button class="event-btn">Join Event</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-engagement">
+                    <div class="engagement-stats">
+                        <div class="reactions">
+                            <!-- Removed emojis, replaced with Remix icon -->
+                            <i class="ri-thumb-up-line"></i>
+                            <span class="reaction-count">15 reactions</span>
+                        </div>
+                        <span class="comments-count">7 comments</span>
+                    </div>
+                    <div class="engagement-actions">
+                        <button class="engage-btn"><i class="ri-thumb-up-line"></i> Like</button>
+                        <button class="engage-btn"><i class="ri-chat-3-line"></i> Comment</button>
+                        <button class="engage-btn"><i class="ri-share-forward-line"></i> Share</button>
+                    </div>
+                </div>
+                <div class="comments-section">
+                    <div class="comment-list" id="comments-3">
+                        <!-- Example comment -->
+                        <div class="comment-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=28&h=28&fit=crop&crop=face" class="comment-avatar" alt="User">
+                            <div>
+                                <div class="comment-content">Can't wait for this!</div>
+                                <div class="comment-meta">Paul · 1h ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="add-comment-form" onsubmit="return addComment(event, 3)">
+                        <input class="add-comment-input" type="text" placeholder="Add a comment..." required>
+                        <button class="add-comment-btn" type="submit">Post</button>
+                    </form>
+                </div>
+                <div class="rating-section" data-post="3">
+                    <span class="rating-label">Rate:</span>
+                    <span class="rating-stars">
+                        <i class="ri-star-fill rating-star" data-value="1"></i>
+                        <i class="ri-star-fill rating-star" data-value="2"></i>
+                        <i class="ri-star-fill rating-star" data-value="3"></i>
+                        <i class="ri-star-fill rating-star" data-value="4"></i>
+                        <i class="ri-star-fill rating-star" data-value="5"></i>
+                    </span>
+                    <span class="rating-value" id="rating-value-3">0</span>
+                </div>
+            </div>
+            <!-- Post 4 -->
+            <div class="feed-post">
+                <div class="feed-post-header">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Alex Tche" class="feed-post-avatar">
+                    <span class="feed-post-author">Alex Tche</span>
+                    <span class="feed-post-time">2 days ago</span>
+                </div>
+                <div class="feed-post-content">
+                    Week 3 of my internship at TechCorp! Building a customer management system with Node.js and MongoDB. The learning curve is steep but I'm loving every moment 💻
+                    <div class="progress-card">
+                        <h4>Internship Progress</h4>
+                        <div class="progress-items">
+                            <div class="progress-item completed">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>Backend API Development</span>
+                            </div>
+                            <div class="progress-item completed">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>Database Design</span>
+                            </div>
+                            <div class="progress-item in-progress">
+                                <i class="ri-time-line"></i>
+                                <span>Frontend Integration</span>
+                            </div>
+                            <div class="progress-item pending">
+                                <i class="ri-checkbox-blank-circle-line"></i>
+                                <span>Testing & Deployment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-engagement">
+                    <div class="engagement-stats">
+                        <div class="reactions">
+                            <!-- Removed emojis, replaced with Remix icon -->
+                            <i class="ri-thumb-up-line"></i>
+                            <span class="reaction-count">18 reactions</span>
+                        </div>
+                        <span class="comments-count">4 comments</span>
+                    </div>
+                    <div class="engagement-actions">
+                        <button class="engage-btn"><i class="ri-thumb-up-line"></i> Like</button>
+                        <button class="engage-btn"><i class="ri-chat-3-line"></i> Comment</button>
+                        <button class="engage-btn"><i class="ri-share-forward-line"></i> Share</button>
+                    </div>
+                </div>
+                <div class="comments-section">
+                    <div class="comment-list" id="comments-4">
+                        <!-- Example comment -->
+                        <div class="comment-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=28&h=28&fit=crop&crop=face" class="comment-avatar" alt="User">
+                            <div>
+                                <div class="comment-content">Impressive work!</div>
+                                <div class="comment-meta">Sophie · 5m ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="add-comment-form" onsubmit="return addComment(event, 4)">
+                        <input class="add-comment-input" type="text" placeholder="Add a comment..." required>
+                        <button class="add-comment-btn" type="submit">Post</button>
+                    </form>
+                </div>
+                <div class="rating-section" data-post="4">
+                    <span class="rating-label">Rate:</span>
+                    <span class="rating-stars">
+                        <i class="ri-star-fill rating-star" data-value="1"></i>
+                        <i class="ri-star-fill rating-star" data-value="2"></i>
+                        <i class="ri-star-fill rating-star" data-value="3"></i>
+                        <i class="ri-star-fill rating-star" data-value="4"></i>
+                        <i class="ri-star-fill rating-star" data-value="5"></i>
+                    </span>
+                    <span class="rating-value" id="rating-value-4">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="load-more" style="margin-top: 1.2rem;">
+            <button class="load-more-btn" onclick="loadMorePosts()">
+                <i class="ri-loader-4-line"></i>
+                Load More Posts
+            </button>
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Post</h3>
+                <button class="close-btn" onclick="closePostModal()">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="post-author">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Alex Tche" class="modal-avatar">
+                    <div class="author-info">
+                        <span class="author-name">Alex Tche</span>
+                        <select class="privacy-select">
+                            <option value="public">🌍 Public</option>
+                            <option value="friends">👥 Friends</option>
+                            <option value="mentors">🎓 Mentors Only</option>
+                        </select>
+                    </div>
+                </div>
+                <textarea class="modal-textarea" placeholder="What's on your mind?"></textarea>
+                <div class="modal-actions">
+                    <button class="modal-action-btn"><i class="ri-image-line"></i> Photo/Video</button>
+                    <button class="modal-action-btn"><i class="ri-map-pin-2-line"></i> Location</button>
+                    <button class="modal-action-btn"><i class="ri-price-tag-3-line"></i> Tag Skills</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="post-submit-btn">Post</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="mentees_script.js"></script>
+</body>
+</html>
